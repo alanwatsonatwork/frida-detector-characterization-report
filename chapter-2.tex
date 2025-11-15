@@ -1,0 +1,98 @@
+\chapter{Reference Subtraction}
+
+H2RGs have a border of reference pixels that is four columns and four rows wide. These pixels do not respond to light but are otherwise identical to the active pixels. They can be used to reduce correlated noise (bias fluctuations) in the active region.
+
+The FRIDA H2RG can be read using 1, 4, or 32 channels. We anticipate that most data will be read with 32 channels. Each channel reads a section of the detector that is 64 columns wide and 2048 rows high.
+
+\section{Channel Correction}
+
+Figure \ref{figure:channelcorrection-raw} shows typical pair of dark images after subtracting one from the other and then subtracting the median. It shows strong vertical striping is caused by different bias levels in each channel in the two images. Figure \ref{figure:channelcorrection-raw-changes} shows that the vertical striping changes and so the difference in bias level with time. It must be corrected on each pair of images.
+
+To remove the vertical striping, we determine the mean level (with robust $3\sigma$ rejection about the median and ignoring zero pixels) in the lower and upper reference sections in each channel. We then either average the two values (zero-order correction) or linearly interpolate between the two (first-order correction) and subtract this from corresponding pixels. Since each reference section in a channel has $4 \times 64$ pixels, we estimate that we can determine the value of the reference with a standard deviation of $0.09\sigma_r$ in which $\sigma_r$ is the read noise.
+
+The results are shown in Figures \ref{figure:channelcorrection-0} and \ref{figure:channelcorrection-1}. As these images still show significant horizontal striping (discussed below), we have subtracted the median from each line and show the results in Figures \ref{figure:channelcorrection-0-difference} and \ref{figure:channelcorrection-1-difference}. These better show the results of the channel correction within and between channels. First-order correction seems to work better, for example, in the leftmost channel. Obviously, any higher-order variation will not be removed by this method.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.8\linewidth]{chapter-2/channelcorrection-raw.png}
+  \caption{A typical pair of dark images after subtracting one from the other and then subtracting the median.}
+  \label{figure:channelcorrection-raw}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-2/channelcorrection-raw-changes.png}
+  \caption{The differences in twenty pairs of dark images, showing that the channel correction varies with time.}
+  \label{figure:channelcorrection-raw-changes}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.8\linewidth]{chapter-2/channelcorrection-0.png}
+  \caption{A typical pair of dark images after subtracting one from the other, subtracting the median, and zeroth-order channel correction.}
+  \label{figure:channelcorrection-0}
+
+  \includegraphics[width=0.8\linewidth]{chapter-2/channelcorrection-0-difference.png}
+  \caption{A typical pair of dark images after subtracting one from the other, subtracting the median, zeroth-order channel correction, and then subtracting the median from each row.}
+  \label{figure:channelcorrection-0-difference}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.8\linewidth]{chapter-2/channelcorrection-1.png}
+  \caption{A typical pair of dark images after subtracting one from the other, subtracting the median, and first-order channel correction.}
+  \label{figure:channelcorrection-1}
+
+  \includegraphics[width=0.8\linewidth]{chapter-2/channelcorrection-1-difference.png}
+  \caption{A typical pair of dark images after subtracting one from the other, subtracting the median, first-order channel correction, and then subtracting the median from each row.}
+  \label{figure:channelcorrection-1-difference}
+
+\end{figure}
+
+Some H2RGs suffer from alternating-column noise or ACN \citep{rauscher-2022} and are better corrected by considering the odd and even columns in each channel separately. We have seen no evidence for ADC in the FRIDA H2RG, but our code has an option to perform this correction.
+
+\section{Row Correction}
+
+As mentioned above, Figures \ref{figure:channelcorrection-0} and \ref{figure:channelcorrection-1} show horizontal striping. This is the result of higher frequency fluctuations in the bias as the detector is read vertically and has been discussed in detail by \cite{moseley-2010}, \cite{rauscher-2017}, and \cite{rauscher-2022}. Figure \ref{figure:channel-correction-1-changes} shows the difference in twenty pairs of images after first-order channel correction. The horizontal pattern in each is different, again showing that this changes from image to image and that it needs to be corrected in each difference image.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-2/channelcorrection-1-changes.png}
+  \caption{The differences in twenty pairs of dark images after first-order channel correction, showing that the horizontal striping.}
+  \label{figure:channel-correction-1-changes}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-2/rowcorrection-1024-changes.png}
+  \caption{The differences in twenty pairs of dark images after first-order channel correction and subtracting the median from each row.}
+  \label{figure:row-correction-changes}
+
+\end{figure}
+
+Figures \ref{figure:channelcorrection-0-difference} and \ref{figure:channelcorrection-1-difference} show that subtracting the median from each row largely removes the horizontal stripes. That is, it suggests that the fluctuations are to a large degree constant during the time it takes to read one row. This is confirmed in Figure \ref{figure:row-correction-changes} shows the difference in twenty pairs of images after first-order channel correction. The horizontal stripes are largely removed.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-2/rowpattern-changes.png}
+  \caption{The pattern of horizontal striping in differences in twenty pairs of dark images, determined by taking the median of each row after first-order channel correction. The RMS in these images is 3.3 DN.}
+  \label{figure:row-pattern-changes}
+
+\end{figure}
+
+Figure \ref{figure:channel-correction-1-changes} shows pattern of horizontal striping in differences in twenty pairs of dark images, determined by taking the median of each row after first-order channel correction. The RMS level of this pattern is 3.3 DN. The RMS in the difference images after removing this pattern is 12.9 DN. Thus, the horizontal striping has an amplitude of only about 25\% of the read noise, but nevertheless is visible because it is strongly correlated.
+
+Of course, subtracting the median from each row is not always possible with science data. However, we might hope to use the reference columns at either side of the image for this. A simple consideration of the noise levels shows that this will not be trivial. We have eight reference pixels per row and can use these to determine the mean with an uncertainty of $12.9/\sqrt{8} \approx 4.6$ DN. This is larger than the RMS level of the horizontal striping of 3.3 DN. Thus, using the reference columns to determine the correction for each line individually might remove the general trends, but will introduce row-to-row noise. (When we use the whole row to determine the correction, we can determine the mean with an uncertainty of $12.9/\sqrt{2048} \approx0.3$ DN, which explains the success of this method.)
+
+If this correlated noise proves to be a problem in science data, we would recommend removing it using the method described by \cite{rauscher-2022}. However, implementing this method is beyond the goals of this current work.
