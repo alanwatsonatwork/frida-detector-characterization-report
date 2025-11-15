@@ -1,0 +1,44 @@
+\chapter{Read Noise and Gain}
+
+\section{Read Noise}
+
+We determined the single-frame read noise by subtracting adjacent pairs of images in a ramp of 500 dark images. We ignored the first four images, as they are reset-read images and have additional noise from the resets. We then divided the differences by $\sqrt{2}$ and processed them statistically to give the single-frame read noise.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-time.png}
+  \caption{The behavior of the whole-frame read noise during a ramp of 500 images. The mean is 9.46 DN and the standard deviation is 0.1 DN.}
+  \label{figure:readnoise-time}
+
+\end{figure}
+
+We first consider the temporal uniformity of the whole-frame read noise. For that, we determined the mean read noise in each frame and then consider its behavior over time. Figure~\ref{figure:readnoise-time} shows the read noise in each pair of images. The mean is 9.46 DN and the standard deviation is 0.1 DN. Any systematic or random deviations from a constant read noise is very small.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-image.png}
+  \caption{An image of the single-pixel read noise.}
+  \label{figure:readnoise-image}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-rows.png}
+  \caption{The mean read noise in each row.}
+  \label{figure:readnoise-rows}
+
+\end{figure}
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-columns.png}
+  \caption{The mean read noise in each column.}
+  \label{figure:readnoise-columns}
+
+\end{figure}
+
+We next consider the spatial uniformity of the single-pixel read noise. For that, we determined the mean read noise in each pixel by taking statistics through the stack. Figure~\ref{figure:readnoise-image} shows the resulting image of the single-pixel read noise. As expected, each channel has a slightly different read noise and there are columns at the edges of channels that have higher values, but on the whole the image is quite uniform. These statements are reinforced by Figures~\ref{figure:readnoise-rows} and \ref{figure:readnoise-columns}, which show the mean read noise in each row and each column. The slight differences between the channels and the slightly noisier pixels at the channel edges are obvious in Figure~\ref{figure:readnoise-columns}.
