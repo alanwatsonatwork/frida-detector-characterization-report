@@ -1,0 +1,64 @@
+\chapter{Non-Linearity}
+
+\section{Global Non-Linearity}
+
+We determined the global non-linearity by fitting a quadratic function to the mean value of images in a ramp, after performing first-order reference correction. We used the specific model:
+\begin{eqnarray}
+    \bar n = a + b i + c i^2,
+\end{eqnarray}
+in which $\bar n$ is the mean value and $i$ is the image sequence number. The corresponding nominal linear model is just $a + bi$.
+
+The first two images in a ramp seem to show anomalous values (perhaps a timing anomaly) and so were not included in the fit. We fitted up to images with 45,000 DN, which we empirically determined is close to point beyond which a quadratic fit is no longer adequate.
+
+The global fit is shown in Figure~\ref{figure:linearity-data} and the residuals (the ratio of the data to the fitted model) in Figure~\ref{figure:linearity-residual}. The fitted coefficients are:
+\begin{eqnarray}
+    a &=& 1764\\
+    b &=& 2229\\
+    c &=& -11.41
+\end{eqnarray}
+We can see that the detector is well modelled by a quadratic response below 45,000 DN, with errors of much less than 1\%, but this model becomes inadequate at about 50,000 DN as the detector saturates. Our  limit of 45,000 DN corresponds to about 100,000~$e$.
+
+\begin{figure}
+    \centering
+
+    \includegraphics[width=0.9\linewidth]{chapter-4/linearity-data.png}
+    \caption{The fit for the global non-linearity model. The limits of the fit are shown with horizontal dashed lines. Both the quadratic fit and the nominal linear model are shown.}
+    \label{figure:linearity-data}
+
+    \includegraphics[width=0.9\linewidth]{chapter-4/linearity-residual.png}
+    \caption{The residuals (the ratio of the data to the fitted model) for the global non-linearity model. The anomalies in the first two images are obvious.}
+    \label{figure:linearity-residual}
+
+\end{figure}
+
+We can quantify the non-linearity by the ratio $f$ between the non-linear model and the nominal linear model:
+\begin{eqnarray}
+    f &=& \frac{a + b i + c i^2}{a + b i}
+\end{eqnarray}
+This is shown in Figure~\ref{figure:linearity-correction}. We see that the non-linearity is approximately 10\% at 45,000 DN.
+
+\begin{figure}
+    \centering
+
+    \includegraphics[width=0.9\linewidth]{chapter-4/linearity-correction.png}
+    \caption{The fit for the global non-linearity ratio $f$.}
+    \label{figure:linearity-correction}
+
+\end{figure}
+
+\section{Channel-to-Channel Variation}
+
+We might expect each channel to have a slightly different non-linearity. We can quantify this by fitting a model to the pixels for each channel and then plotting $c/b$. We see that this varies across the detector from about $-0.004$ to $-0.006$. This suggests that it may be worth considering correcting the non-linearity on a channel-by-channel basis.
+
+\begin{figure}
+    \centering
+
+    \includegraphics[width=0.9\linewidth]{chapter-4/linearity-channel.png}
+    \caption{The value of $c/b$ for each channel.}
+    \label{figure:linearity-channel}
+
+\end{figure}
+
+\section{Comparison to Values Measured at IAC}
+
+The comparison to the non-linearity measured at IAC is not trivial. The figure on page 37 of \cite{rodriguez-2025} shows larger deviations, but this appears to be the result of fitting a model well beyond the limit 45,000 DN that we consider appropriate.
