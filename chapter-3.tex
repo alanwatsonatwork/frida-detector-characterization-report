@@ -42,3 +42,82 @@ We first consider the temporal uniformity of the whole-frame read noise. For tha
 \end{figure}
 
 We next consider the spatial uniformity of the single-pixel read noise. For that, we determined the mean read noise in each pixel by taking statistics through the stack. Figure~\ref{figure:readnoise-image} shows the resulting image of the single-pixel read noise. As expected, each channel has a slightly different read noise and there are columns at the edges of channels that have higher values, but on the whole the image is quite uniform. These statements are reinforced by Figures~\ref{figure:readnoise-rows} and \ref{figure:readnoise-columns}, which show the mean read noise in each row and each column. The slight differences between the channels and the slightly noisier pixels at the channel edges are obvious in Figure~\ref{figure:readnoise-columns}.
+
+\section{Gain}
+
+We determine the gain by subtracting corresponding pairs of images from illuminated ramps and fitting a straight line to the variance in the difference as a function of the mean signal.
+
+In an image with signal of $n_e$ electrons and a read noise of $r_e$, the variance $\sigma_e^2$ in electrons will be
+\begin{eqnarray}
+  \sigma_e^2 &=& r_e^2 + n_e.
+\end{eqnarray}
+If the gain is $g$, then the variance $\sigma^2$ in DN will be
+\begin{eqnarray}
+    \sigma^2 &=& \frac{\sigma_e^2}{g^2}\\
+    &=& \frac{r_e^2+n_e}{g^2}\\
+    &=& \frac{r_e^2+n_e}{g^2} + \frac{n}{g}.
+\end{eqnarray}
+The variance $v$ in the difference of two images with a signal of $n$ will then be:
+\begin{eqnarray}
+    v &=& 2\sigma^2\\
+    &=& \frac{2r_e^2+n_e}{g^2} + \frac{2n}{g}.
+\end{eqnarray}
+Thus, a straight-line fit to $v$ as a function of $n$ will have a slope of $2/g$. In applying this, it is important to keep within the moderately linear regime of the detector.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1.png}
+  \caption{The variance-mean plot for a ramp.}
+  \label{figure:gain-0-1}
+
+\end{figure}
+
+The result of one fit is shown in Figure~\ref{figure:gain-0-1} and gives a gain of 2.24 $e/\mathrm{DN}$. This was repeated four times, and the gain was the same to the second decimal place.
+
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-0.png}
+  \caption{The gain in each column.}
+  \label{figure:gain-0-1-columns}
+
+\end{figure}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-1.png}
+  \caption{The gain in each row.}
+  \label{figure:gain-0-1-rows}
+
+\end{figure}
+
+Again, we can look for variations in the gain between columns (or channels) and rows. Figures \ref{figure:gain-0-1-columns} and \ref{figure:gain-0-1-rows} show this. There are small variations in the gain between channels. There is also an apparent systematic decrease in the gain with row, although since this is not accompanied by a corresponding increase in the read noise (in DN) in Figure~\ref{figure:readnoise-rows}, we suspect it is a spurious effect possibly due to slight increased cross-talk as the read proceeds.
+
+\section{Comparison to Values Measured at IAC}
+
+\begin{table}
+\centering
+\caption{Gain and Read Noise Comparison}
+\label{table:gain-and-read-noise-comparison}
+\medskip
+\begin{tabular}{llll}
+  \toprule
+  Quantity&Unit&IAC&UNAM\\
+  \midrule
+  Gain&$e/\mbox{DN}$&2.70&2.24\\
+  Read Noise&DN&8.62&9.46\\
+  Read Noise&$e$&23.2&21.3\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\cite{rodriguez-2025} performed similar tests at IAC prior to shipping the detector to UNAM for installation in the FRIDA cryostat. Table~\ref{table:gain-and-read-noise-comparison} shows the IAC and UNAM values.
+
+We see that the gain measured at UNAM is smaller (in $e/\mathrm{DN}$) by about 17\%. Some of this can be explained by the different ranges of signal level used to determine the gain. The IAC team used values up to about 32,000 DN whereas we used values only up to about 20,000 DN. The IAC fit is therefore more affected by non-linearity, which causes a shallower slope and higher gain.
+
+The read noise in DN measured at UNAM is about 10\% higher than at IAC. Assuming the gain really is constant, this represents a real increase in the read noise and is probably due to the slightly noisier environment in the FRIDA cryostat compared to the test cryostat at IAC. Nevertheless, the change is small.
+
+The read noise in electrons measured by both teams is less than 25 electrons and within specification.
