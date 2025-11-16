@@ -5,39 +5,39 @@
 We determined the single-frame read noise by subtracting adjacent pairs of images in a ramp of 500 dark images. We ignored the first four images, as they are reset-read images and have additional noise from the resets. We then divided the differences by $\sqrt{2}$ and processed them statistically to give the single-frame read noise.
 
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-time.png}
-  \caption{The behavior of the whole-frame read noise during a ramp of 500 images. The mean is 9.46 DN and the standard deviation is 0.1 DN.}
-  \label{figure:readnoise-time}
+    \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-time.png}
+    \caption{The behavior of the whole-frame read noise during a ramp of 500 images. The mean is 9.46 DN and the standard deviation is 0.1 DN.}
+    \label{figure:readnoise-time}
 
 \end{figure}
 
 We first consider the temporal uniformity of the whole-frame read noise. For that, we determined the mean read noise in each frame and then consider its behavior over time. Figure~\ref{figure:readnoise-time} shows the read noise in each pair of images. The mean is 9.46 DN and the standard deviation is 0.1 DN. Any systematic or random deviations from a constant read noise is very small.
 
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-image.png}
-  \caption{An image of the single-pixel read noise.}
-  \label{figure:readnoise-image}
+    \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-image.png}
+    \caption{An image of the single-pixel read noise.}
+    \label{figure:readnoise-image}
 
 \end{figure}
 
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-rows.png}
-  \caption{The mean read noise in each row.}
-  \label{figure:readnoise-rows}
+    \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-rows.png}
+    \caption{The mean read noise in each row.}
+    \label{figure:readnoise-rows}
 
 \end{figure}
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-columns.png}
-  \caption{The mean read noise in each column.}
-  \label{figure:readnoise-columns}
+    \includegraphics[width=0.9\linewidth]{chapter-3/readnoise-columns.png}
+    \caption{The mean read noise in each column.}
+    \label{figure:readnoise-columns}
 
 \end{figure}
 
@@ -49,7 +49,7 @@ We determine the gain by subtracting corresponding pairs of images from illumina
 
 In an image with signal of $n_e$ electrons and a read noise of $r_e$, the variance $\sigma_e^2$ in electrons will be
 \begin{eqnarray}
-  \sigma_e^2 &=& r_e^2 + n_e.
+    \sigma_e^2 &=& r_e^2 + n_e.
 \end{eqnarray}
 If the gain is $g$, then the variance $\sigma^2$ in DN will be
 \begin{eqnarray}
@@ -65,32 +65,31 @@ The variance $v$ in the difference of two images with a signal of $n$ will then 
 Thus, a straight-line fit to $v$ as a function of $n$ will have a slope of $2/g$. In applying this, it is important to keep within the moderately linear regime of the detector.
 
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1.png}
-  \caption{The variance-mean plot for a ramp.}
-  \label{figure:gain-0-1}
+    \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1.png}
+    \caption{The variance-mean plot for a ramp.}
+    \label{figure:gain-0-1}
 
 \end{figure}
 
 The result of one fit is shown in Figure~\ref{figure:gain-0-1} and gives a gain of 2.24 $e/\mathrm{DN}$. This was repeated four times, and the gain was the same to the second decimal place.
 
-
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-0.png}
-  \caption{The gain in each column.}
-  \label{figure:gain-0-1-columns}
+    \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-0.png}
+    \caption{The gain in each column.}
+    \label{figure:gain-0-1-columns}
 
 \end{figure}
 
 \begin{figure}
-  \centering
+    \centering
 
-  \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-1.png}
-  \caption{The gain in each row.}
-  \label{figure:gain-0-1-rows}
+    \includegraphics[width=0.9\linewidth]{chapter-3/gain-0-1-1.png}
+    \caption{The gain in each row.}
+    \label{figure:gain-0-1-rows}
 
 \end{figure}
 
@@ -99,19 +98,19 @@ Again, we can look for variations in the gain between columns (or channels) and 
 \section{Comparison to Values Measured at IAC}
 
 \begin{table}
-\centering
-\caption{Gain and Read Noise Comparison}
-\label{table:gain-and-read-noise-comparison}
-\medskip
-\begin{tabular}{llll}
-  \toprule
-  Quantity&Unit&IAC&UNAM\\
-  \midrule
-  Gain&$e/\mbox{DN}$&2.70&2.24\\
-  Read Noise&DN&8.62&9.46\\
-  Read Noise&$e$&23.2&21.3\\
-  \bottomrule
-\end{tabular}
+    \centering
+    \caption{Gain and Read Noise Comparison}
+    \label{table:gain-and-read-noise-comparison}
+    \medskip
+    \begin{tabular}{llll}
+        \toprule
+        Quantity&Unit&IAC&UNAM\\
+        \midrule
+        Gain&$e/\mbox{DN}$&2.70&2.24\\
+        Read Noise&DN&8.62&9.46\\
+        Read Noise&$e$&23.2&21.3\\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
 \cite{rodriguez-2025} performed similar tests at IAC prior to shipping the detector to UNAM for installation in the FRIDA cryostat. Table~\ref{table:gain-and-read-noise-comparison} shows the IAC and UNAM values.
