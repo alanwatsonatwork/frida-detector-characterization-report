@@ -8,7 +8,7 @@ The FRIDA H2RG can be read using 1, 4, or 32 channels. We anticipate that most d
 
 Figure \ref{figure:channelcorrection-raw} shows typical pair of dark images after subtracting one from the other and then subtracting the median. It shows strong vertical striping is caused by different bias levels in each channel in the two images. Figure \ref{figure:channelcorrection-raw-changes} shows that the vertical striping changes and so the difference in bias level with time. It must be corrected on each pair of images.
 
-To remove the vertical striping, we determine the mean level (with robust $3\sigma$ rejection about the median and ignoring zero pixels) in the lower and upper reference sections in each channel. We then either average the two values (zero-order correction) or linearly interpolate between the two (first-order correction) and subtract this from corresponding pixels. Since each reference section in a channel has $4 \times 64$ pixels, we estimate that we can determine the value of the reference with a standard deviation of $0.09\sigma_r$ in which $\sigma_r$ is the read noise.
+To remove the vertical striping, we determine the mean level (with robust $3\sigma$ rejection about the median and ignoring zero pixels) in the lower and upper reference sections in each channel. We then either average the two values (zero-order correction) or linearly interpolate between the two (first-order correction) and subtract this from corresponding pixels. Since each reference section in a channel has $4 \times 64$ pixels, we estimate that we can determine the value of the reference with a standard deviation of $0.0625\sigma_r$ in which $\sigma_r$ is the read noise.
 
 The results are shown in Figures \ref{figure:channelcorrection-0} and \ref{figure:channelcorrection-1}. As these images still show significant horizontal striping (discussed below), we have subtracted the median from each line and show the results in Figures \ref{figure:channelcorrection-0-difference} and \ref{figure:channelcorrection-1-difference}. These better show the results of the channel correction within and between channels. First-order correction seems to work better, for example, in the leftmost channel. Obviously, any higher-order variation will not be removed by this method.
 
@@ -56,7 +56,7 @@ The results are shown in Figures \ref{figure:channelcorrection-0} and \ref{figur
 
 \end{figure}
 
-Some H2RGs suffer from alternating-column noise or ACN \citep{rauscher-2022} and are better corrected by considering the odd and even columns in each channel separately. We have seen no evidence for ADC in the FRIDA H2RG, but our code has an option to perform this correction.
+Some H2RGs suffer from alternating-column noise or ACN \citep{rauscher-2022} and are better corrected by considering the odd and even columns in each channel separately. We have seen no evidence for ACN in the FRIDA H2RG, but our code has an option to perform this correction.
 
 \section{Row Correction}
 

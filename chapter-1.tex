@@ -6,16 +6,24 @@ This document describes the process and results of the characterization of the F
 
 All images were taken with the MSAC laboratory data acquisition system on the Linux computer provided by IAC and described by \cite{rodriguez-2025}. All data were taken with a gain mode of 10.
 
-<We typically took ramp exposures with three resets, no dropped frames, and one frame per group. We begin analysis with the fourth image in each ramp.
+<We typically took ramp exposures with ten resets, no dropped frames, and 500 frame per group. We begin analysis with the fourth image in each ramp.
 
 \section{Dark Configuration}
 
-Some of our tests require that the detector not be illuminated. TODO: description of configuration.
+Some of our tests require that the detector not be illuminated. For the dark-current and background measurements, we used the following configuration:
+
+• MS-1 (image mode) selected in the mode selector.
+• Filter Wheel 1 positioned at FW1-18.
+• Filter Wheel 2 positioned at FW2-18.
+• FW Bloqued
+• MS out
+
+With both filter wheels at position 18, the optical path is fully blocked, ensuring that the detector is operated under true dark conditions..
 
 \section{Illumination Environment}
 
-Some of our tests require that the detector be illuminated. For these, we used the FRIDA calibration unit. This is an external system that can place lamps in front for the cryostat window and feed the optical path with an approximately XX beam from either a stabilized tungsten lamp and an arc lamp are available. We used the tungsten lamp.
+Some of our tests require that the detector be illuminated. For these, we used the FRIDA calibration unit. This is an external system that can place lamps in front for the cryostat window and feed the optical path with an approximately 4 mm $f/15$ beam and pupil in infinity position from either a stabilized tungsten lamp and an ThAr arc lamp are available. We used the tungsten lamp.
 
-We operated the instrument in imaging mode. The calibration unit is designed mainly to calibrate the IFS mode and so does not uniformly illuminate the field of view in imaging mode. To mitigate this, we used it with the fine camera. However, as the focal plane mask for the fine camera slightly vignettes the edges of the field, we used the larger focal plane mask for the medium camera.
+We operated the instrument in imaging mode. The calibration unit is designed mainly to calibrate the IFS mode and therefore does not uniformly illuminate the field of view in imaging mode. To mitigate this, we used it with the fine camera. However, as the focal plane mask for the fine camera slightly vignettes the edges of the field, we used the larger focal plane mask for the medium camera.
 
 With the inscribed pupil stop, the NB2.48 filter, and the ND2 filter, and with the lamp supplied with 1.07 A, the count rate was about XX DN/s.
